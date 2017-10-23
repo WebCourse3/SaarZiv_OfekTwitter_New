@@ -1,14 +1,23 @@
-section div {
-	width: 300px;
-	border: 1px solid ;
-	padding: 25px;
-	margin: 25px;
-
-}
-h3 {
+label {
 	color: whitesmoke;
 	background-color: #1a75ff;
 }
+
 form {
 	border : 3px solid #f1f1f1;
+
+}
+.thisShit {
+	border: 1px green solid;
+	width: 300px;
+	border: 1px solid ;
+
+	margin-left: 30em;
+	margin-top:1em ;
+}
+
+.topic {
+	border: red 1px solid;
+	background-color: #1a75ff;
+	margin-top: 0;
 }
