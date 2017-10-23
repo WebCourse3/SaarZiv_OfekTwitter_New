@@ -1,0 +1,14 @@
+section div {
+	width: 300px;
+	border: 1px solid ;
+	padding: 25px;
+	margin: 25px;
+
+}
+h3 {
+	color: whitesmoke;
+	background-color: #1a75ff;
+}
+form {
+	border : 3px solid #f1f1f1;
+}
