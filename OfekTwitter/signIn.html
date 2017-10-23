@@ -5,7 +5,7 @@
       </title>
       <link rel = "stylesheet"
        type = "text/css"
-       href = "../css/signIn.css" />
+       href = "../css/signIn&up.css" />
         <link rel = "stylesheet"
               type = "text/css"
               href = "../css/navBar.css" />
@@ -14,22 +14,27 @@
         <img src="../Images/ofek.png" />
         <h3><div>OfekTwitter </div></h3>
         <ul>
-            <li><a href="/OfekTwitter/signIn.html">SignIn</a></li>
-            <li><a href="/OfekTwitter/signUp.html">SignUp</a></li>
-            <li><a href="/User.html">Users</a></li>
+            <li><a href="signIn.html">SignIn</a></li>
+            <li><a href="signUp.html">SignUp</a></li>
+            <li><a href="User.html">Users</a></li>
         </ul>
 
     </nav>
     <section>
-        <div class="thisShit">
+        <div class="LoginBox">
             <div class="topic"><label>Sign In</label></div>
+            <div class="LoginInputBox">
             <form type="submit">
+                <div class="LoginInputFields">
+                    <b>Username</b> <input id="userName" type="text">
+                    <b>Password</b> <input id="password" type="text">
+                </div>
 
 
-
-
-                <button type="button">Submit</button>
             </form>
+                <button id="Submit"  type="button">Submit</button>
+            </div>
+
         </div>
     </section>
     <article>
