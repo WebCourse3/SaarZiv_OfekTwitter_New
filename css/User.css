@@ -9,19 +9,22 @@ article {
 }
 .usersDiv {
     border: 3px solid lightgray;
-    margin-right: 880px;
 
 }
 .userInfoDiv {
-    margin: 20px;
-    margin-right: 10px;
-
 }
 ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
 }
-li {
-    display: inline;
+#Followees {
+    margin-right: 10px;
+}
+.usersDivFollowees {
+    border: 3px solid lightgray;
+    margin-left: 950px;
+    margin-right: 150px;
+    margin-bottom: 800px;
+}
+.userInfoDivFollowees {
+    margin: 5px;
 }
