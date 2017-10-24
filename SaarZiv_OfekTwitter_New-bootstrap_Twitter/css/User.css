@@ -1,0 +1,23 @@
+/*bootstrap*/
+.logo {
+    float: left;
+    width: 3%;
+}
+.header-btn {
+    margin-top: 1%;
+    margin-left: 1%;
+}
+.userBox {
+    text-align: center;
+    width: 100%;
+    margin: 0;
+}
+.userBox > div >img  {
+    margin-left: 10%;
+}
+.Followees {
+    text-align: center;
+    height: 100%;
+}
+
+
