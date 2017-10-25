@@ -1,4 +1,7 @@
+/*JS*/
 #ofekImgDiv{
-    margin-top: 2%;
+    margin-top: 5px  ;
+    margin-left: 2%;
     width: 15%;
+    float: left;
 }
