@@ -1,4 +1,3 @@
-/*bootstrap*/
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,28 +8,30 @@
 	<link rel = "stylesheet"
 	      type = "text/css"
 	      href = "../css/User.css" />
+	<link rel = "stylesheet"
+		  type = "text/css"
+		  href = "../css/navBar.css" />
 </head>
 <body>
 <header>
-	<nav class="navbar navbar-default navbar-static-top">
-		<div class="logo">
-			<img id="ofekLogo" src="../Images/ofek.png"/>
+	<nav class="navbar navbar-default" style="background-color: #0000ff;">
+		<div class="container-fluid">
+			<ul class="nav nav-pills" style="float: right;">
+				<li role="presentation">
+					<a href='signIn.html' style="color: white">Sign in</a>
+				</li>
+				<li role="presentation">
+					<a href='signUp.html' style="color: white">Sign up</a>
+				</li>
+				<li role="presentation">
+					<a href='users.html' style="color: white">Users</a>
+				</li>
+			</ul>
+			<div class="navbar-header">
+				<img id="ofekImgDiv"  src="../Images/ofek.png">
+				<a href='Index.html' style="margin-right: 30%;font-size: large;color: white">OfekTwitter</a>
+			</div>
 		</div>
-		<div class="header-btn" style="float: left;">
-			<a href='Index.html'>OfekTwitter</a>
-		</div>
-		<ul class="nav nav-pills" style="float: right">
-			<li role="presentation">
-				<a href='signIn.html'>Sign in</a>
-			</li>
-			<li role="presentation">
-				<a href='signUp.html'>Sign up</a>
-			</li>
-			<li role="presentation">
-				<a href='users.html'>Users</a>
-			</li>
-		</ul>
-		<br class=""/>
 	</nav>
 </header>
 <div class="row">
@@ -90,30 +91,78 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="col-sm-2 Followees">
-		<div class="panel panel-default ">
-				<div class="panel-body">
-					<b>Followees</b>
-				</div>
-			<div class="panel panel-default userBox">
-				<div class="panel-body">
-					<img src="../Images/useravatar.png">
-					<button type="button" class="btn btn-primary">Follow</button>
-					<p>Marty lachtong</p>
+			<div class="col-sm-2">
+				<div class="panel panel-default userBox">
+					<div class="panel-body">
+						<img src="../Images/useravatar.png">
+						<button type="button" class="btn btn-primary">Follow</button>
+						<p>Marty lachtong</p>
+					</div>
 				</div>
 			</div>
-			<div class="panel panel-default userBox">
-				<div class="panel-body">
-					<img src="../Images/useravatar.png">
-					<button type="button" class="btn btn-primary">Follow</button>
-					<p>Marty lachtong</p>
+			<div class="col-sm-2">
+				<div class="panel panel-default userBox">
+					<div class="panel-body">
+						<img src="../Images/useravatar.png">
+						<button type="button" class="btn btn-primary">Follow</button>
+						<p>Marty lachtong</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="panel panel-default userBox">
+					<div class="panel-body">
+						<img src="../Images/useravatar.png">
+						<button type="button" class="btn btn-primary">Follow</button>
+						<p>Marty lachtong</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="panel panel-default userBox">
+					<div class="panel-body">
+						<img src="../Images/useravatar.png">
+						<button type="button" class="btn btn-primary">Follow</button>
+						<p>Marty lachtong</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="panel panel-default userBox">
+					<div class="panel-body">
+						<img src="../Images/useravatar.png">
+						<button type="button" class="btn btn-primary">Follow</button>
+						<p>Marty lachtong</p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
+
+<div class="row row-m-b">
+	<div class="col-sm-2 Followees">
+		<div class="thumbnail">
+				<div class="panel-body">
+					<b>Followees</b>
+				</div>
+			<div class="panel panel-default FolloweesBox">
+				<div class="panel-body">
+					<img src="../Images/useravatar.png"><br>
+					<button type="button" class="btn btn-primary">Unfollow</button><br>
+					<p>Marty lachtong</p>
+				</div>
+			</div>
+			<div class="panel panel-default FolloweesBox">
+				<div class="panel-body">
+					<img src="../Images/useravatar.png"><br>
+					<button type="button" class="btn btn-primary">Unfollow</button><br>
+					<p>Marty lachtong</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
