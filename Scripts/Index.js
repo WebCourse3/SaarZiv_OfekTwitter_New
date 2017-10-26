@@ -18,7 +18,7 @@ function loadTweets() {
 function createTweet(userName, tweet) {
 	var li  = document.createElement("li");
 	var imgP = document.createElement("p");
-	var img = document.createElement("img")
+	var img = document.createElement("img");
 	var divText = document.createElement("div");
 	var userNameP  = document.createElement("p");
 	var tweetP  = document.createElement("p");
