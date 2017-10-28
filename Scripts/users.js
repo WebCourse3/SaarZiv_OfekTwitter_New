@@ -12,6 +12,7 @@ var usersList = [
 	{"username":"loko","isFollowing":false},
 	{"username":"bar","isFollowing":false},
 	{"username":"eli","isFollowing":true},
+    {"username":"ekey","isFollowing":false}
 
 ];
 loadUsers();
