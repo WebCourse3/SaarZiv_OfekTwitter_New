@@ -47,5 +47,51 @@ function publish() {
 	newTweetFragment.appendChild(newTweetLi);
 	tweetList.appendChild(newTweetFragment);
 	document.getElementById('Tweet').value = "";
+
 }
+function testPublish(){
+	var tweet = document.getElementById('Tweet').value;
+	var UlElem = document.getElementById('tweetsList');
+	if(UlElem.childElementCount > 5 && tweet === ""){
+		return true;
+	}
+	return false;
+
+}
+function assert(value,name) {
+	var testGroupDiv = document.getElementsByClassName("testGroupDiv");
+	var labelPara = document.createElement('p');
+	var assertLabel = document.createElement("label");
+	assertLabel.innerHTML = name;
+	assertLabel.style.color = "black";
+	(value) ? labelPara.style.background = "green" :labelPara.style.background = "red";
+	labelPara.appendChild(assertLabel);
+	testGroupDiv[testGroupDiv.length -1].appendChild(labelPara);
+}
+function testGroup(testGroupName,assertsFunctions,scope) {
+	var testGroupParentElement = document.getElementById("js-testGroupParent");
+	var testGroupDiv = document.createElement("div");
+	testGroupDiv.className = "testGroupDiv";
+	var h3Title = document.createElement("h3");
+	h3Title.innerHTML = testGroupName;
+	testGroupDiv.appendChild(h3Title);
+	testGroupParentElement.appendChild(testGroupDiv);
+	assertsFunctions();
+	child
+	/*
+	if( &&  &&  &&){
+		testGroupDiv.style.backgroundColor = "lightGreen";
+	}else {
+		testGroupDiv.style.backgroundColor = "lightcoral";
+	}*/
+
+
+}
+testGroup("TestGroupOne", function () {
+	var a,b,c;
+	a= true;b=true;c=true;
+	assert(a, "Test Publish");
+	assert(b, "some test two");
+	assert(c, "some test three");
+},this);
 
