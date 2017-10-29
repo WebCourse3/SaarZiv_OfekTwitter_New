@@ -1,0 +1,19 @@
+/*Js*/
+.logo {
+    float: left;
+    width: 3%;
+}
+.centerPanelBody {
+    text-align: center;
+}
+.tweetInput {
+    width: 89%;
+}
+.inputTweet {
+    height: 100px;
+    width: 100%;
+}
+.pullHigher {
+    margin-top: 2%;
+}
+

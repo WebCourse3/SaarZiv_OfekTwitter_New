@@ -1,7 +1,15 @@
 /*JS*/
 #ofekImgDiv{
-    margin-top: 5px  ;
-    margin-left: 2%;
-    width: 15%;
-    float: left;
+    width: 30%;
 }
+.navBg {
+    background-color: #0000ff;
+}
+.navTextColor {
+    color: white;
+}
+.centerHeadline {
+    display: flex;
+    align-items: center;
+}
+

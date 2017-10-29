@@ -116,14 +116,19 @@ function unFollowUser(btnElement,panelElement,jsFolloweesElement,jsFollowersElem
 function filterUsers(inputElement) {
 	var users = document.getElementsByClassName("js-userName");
 	var usersToHideArr = new Array() ;
+	var usersToShowArr = new Array() ;
 	for (var i  in users){
 		var userText = users[i].innerHTML;
 		if(userText !== undefined){
 			if(!aContainsB(userText,inputElement.value)){
                 usersToHideArr.push(users[i]);
 			}
+			else{
+				usersToShowArr.push(users[i]);
+			}
 		}
 	}
+	showOtherUsers(usersToShowArr);
     hideOtherUsers(usersToHideArr);
 }
 function hideOtherUsers(usersToHideArr) {
@@ -142,6 +147,22 @@ function hideOtherUsers(usersToHideArr) {
 			}
 		}
 	}
-
+}
+function showOtherUsers(usersToShowArr) {
+	var jsFolloweesElement  =  document.getElementById('js-followees-thumbnail');
+	var jsFollowersElement  =  document.getElementById('js-followers');
+	for(var i in usersToShowArr){
+		var panelBody  = usersToShowArr[i].parentElement;
+		var panel = panelBody.parentElement;
+		if(panel.parentElement === jsFolloweesElement) {
+			panel.style.display = "";
+		}
+		else {
+			var col = panel.parentElement;
+			if(col.parentElement === jsFollowersElement){
+				col.style.display = "";
+			}
+		}
+	}
 }
 
