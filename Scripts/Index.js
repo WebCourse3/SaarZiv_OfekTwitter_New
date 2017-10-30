@@ -64,34 +64,30 @@ function assert(value,name) {
 	var assertLabel = document.createElement("label");
 	assertLabel.innerHTML = name;
 	assertLabel.style.color = "black";
-	(value) ? labelPara.style.background = "green" :labelPara.style.background = "red";
+	if(value){
+		labelPara.style.backgroundColor = "green";
+
+	}else{
+		labelPara.style.backgroundColor = "red";
+		this.testGroupDiv.style.backgroundColor = "red";
+	}
 	labelPara.appendChild(assertLabel);
 	testGroupDiv[testGroupDiv.length -1].appendChild(labelPara);
 }
-function testGroup(testGroupName,assertsFunctions,scope) {
+function testGroup(testGroupName,assertsFunctions) {
 	var testGroupParentElement = document.getElementById("js-testGroupParent");
-	var testGroupDiv = document.createElement("div");
-	testGroupDiv.className = "testGroupDiv";
+	this.testGroupDiv = document.createElement("div");
+	this.testGroupDiv.className = "testGroupDiv";
 	var h3Title = document.createElement("h3");
 	h3Title.innerHTML = testGroupName;
-	testGroupDiv.appendChild(h3Title);
-	testGroupParentElement.appendChild(testGroupDiv);
-	assertsFunctions();
-	child
-	/*
-	if( &&  &&  &&){
-		testGroupDiv.style.backgroundColor = "lightGreen";
-	}else {
-		testGroupDiv.style.backgroundColor = "lightcoral";
-	}*/
-
-
+	this.testGroupDiv.appendChild(h3Title);
+	testGroupParentElement.appendChild(this.testGroupDiv);
+	this.testGroupDiv.style.backgroundColor = "green";
+	assertsFunctions.bind(this)();
 }
 testGroup("TestGroupOne", function () {
-	var a,b,c;
-	a= true;b=true;c=true;
-	assert(a, "Test Publish");
-	assert(b, "some test two");
-	assert(c, "some test three");
-},this);
+	assert(true, "Test Publish");
+	assert(true, "some test two");
+	assert(true, "some test three");
+});
 
