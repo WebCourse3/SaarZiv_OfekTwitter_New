@@ -5,7 +5,7 @@ function $(name) {
 var ofekQuery = function (query) {
     var constructor = function () {
         if(testHierarchy(query)){
-            getAllElements(query);
+            return getAllElements(query);
 		}else {
         	console.log("false");
         	return getRootElements(query);
@@ -20,15 +20,20 @@ var ofekQuery = function (query) {
     }
     var getAllElements = function (query) {
         var dividedQuery =  query.split(" ");
-
-        for(var i=0;i<dividedQuery.length;i++){
-            return getHierarchyElements(i,dividedQuery);
-        }
+		var n =0;
+		var allElements = [];
+	    //allElements.push(getHierarchyElements(n,dividedQuery));
+	    return getHierarchyElements(n,dividedQuery);
     }
 	var getHierarchyElements = function (currOperatorIndex,dividedQuery) {
+		var hierarchyElements = [];
+    	var rootElements = getRootElements(dividedQuery[currOperatorIndex]);
+    	var childElement = getChildElements(rootElements,getNextOperator(currOperatorIndex,dividedQuery))
+		if(childElement !=="") {
+			hierarchyElements.push(childElement);
+		}
+		return hierarchyElements;
 
-    	var childElements = getChildElements(getRootElements(dividedQuery[currOperatorIndex]),getNextOperator(currOperatorIndex,dividedQuery))
-		console.log(childElements);
     }
     var getNextOperator = function (currOperatorIndex,dividedQuery){
         return dividedQuery[currOperatorIndex + 1];
@@ -50,22 +55,43 @@ var ofekQuery = function (query) {
     }
 
     var getChildElements = function (RootElements,operator) {
+    	var children ;//need to check,
         for (var j = 0; j < RootElements.length; j++) {
             switch (true){
                 case new RegExp("^#+").test(operator):
-                    return RootElements[j].children.document.getElementById(operator);
+	                children = getThroughChildren(RootElements[j],operator.substr(1),"id");
                     break;
                 case new RegExp("^\\..+").test(operator):
-                    return RootElements[j].children.getElementsByClassName(operator);
+	                children =  getThroughChildren(RootElements[j],operator.substr(1),"class");
                     break;
                 default:
-                    return (RootElements[j].children.getElementsByTagName(operator).length === 0) ? "" :
-                        RootElements[j].children.getElementsByTagName(operator);
+                    return (RootElements[j].getElementsByTagName(operator).length === 0) ? "" :
+	                    children = getThroughChildren(RootElements[j],operator,"tag");
                     break;
 
             }
         }
-
+    }
+    var getThroughChildren = function (RootElement,operator,whatToCheck) {
+	    for (var i = 0; i < RootElement.children.length; i++) {
+	    	switch (whatToCheck) {
+			    case "id":
+				    if (RootElement.children[i].id === operator) {
+					    return RootElement.children[i];
+				    }
+				    break;
+			    case "tag":
+				    if (RootElement.children[i].tagName.toLowerCase() === operator) {
+					    return RootElement.children[i];
+				    }
+				    break;
+			    case "class":
+				    if (RootElement.children[i].className === operator) {
+					    return RootElement.children[i];
+				    }
+		    }
+	    }
+	    return "";
     }
     var elements = constructor();
 
@@ -198,7 +224,7 @@ predTwo = function (elem) {
 fn = function (elem) {
 	elem.innerHTML = "some text";
 }
-var test = $("nav #dani P");
+//var test = $("nav div");
 
 
 
