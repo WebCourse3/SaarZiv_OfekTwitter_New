@@ -10,16 +10,42 @@ var ofekQuery = function (query) {
     var constructor = function () {
         if (testHierarchy(query)) {
             return getAllElements(query);
-        } else {
+        }
+        else if(isTagAndClassQuery) {
+			return getTagAndClassElements(query);
+		}
+        else {
             console.log("false");
             return getRootElements(query);
         }
 
     }
-
     //Private static methods
     var testHierarchy = function (query) {
         return new RegExp("(.+ .+)+").test(query);
+    }
+    var isTagAndClassQuery = function(query){
+    	return new RegExp("[^\s]+\.[^\s]+").test(query);
+	}
+	var getTagAndClassElements = function (query) {
+		var fatherTagElement;
+    	var dividedQuery = query.split(".");
+    	var childrenWithClass = document.getElementsByClassName(dividedQuery[1]);
+    	if(childrenWithClass.length > 0) {
+            for (var i = 0; i < childrenWithClass.length; i++) {
+                if (childrenWithClass[i].parentElement.localName === dividedQuery[0]) {
+                    fatherTagElement = childrenWithClass[i].parentElement;
+                    return fatherTagElement;
+                }
+            }
+            return "";
+        }
+        else{
+            if (childrenWithClass.parent === dividedQuery[0]) {
+                fatherTagsElements.push(childrenWithClass)
+            }
+		}
+		return fatherTagsElements;
     }
     var getAllElements = function (query) {
         var childrenOfAllRoot = [];
