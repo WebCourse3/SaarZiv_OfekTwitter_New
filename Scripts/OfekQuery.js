@@ -18,7 +18,6 @@ var ofekQuery = function (query) {
 
     }
 
-
     //Private static methods
     var testHierarchy = function (query) {
         return new RegExp("(.+ .+)+").test(query);
@@ -27,16 +26,22 @@ var ofekQuery = function (query) {
         var childrenOfAllRoot = [];
     	var lastChildren = [];
     	var dividedQuery = query.split(" ");
-    	var n = 0;
-        /*for (var n = 0; n<dividedQuery.length;n++) {
-            childrenOfAllRoot =  getHierarchyElements(n, dividedQuery);
+	    var firstRootElements = getRootElements(dividedQuery[0]);
+	    if(firstRootElements === ""){
+	    	return "";
+	    }
+        for (var n = 0; n<(dividedQuery.length -1);n++) {
+            (n === 0) ? childrenOfAllRoot =  getHierarchyElements(n, dividedQuery ,firstRootElements ) :
+	            childrenOfAllRoot =  getHierarchyElements(n, dividedQuery ,childrenOfAllRoot )
+	        if(childrenOfAllRoot === "" || childrenOfAllRoot.length === 0){
+		        return "";
+	        }
         }
         lastChildren = pushChildren(childrenOfAllRoot,lastChildren)
-		return lastChildren*/
-        return getHierarchyElements(n,dividedQuery);
+		return lastChildren;
+        //return getHierarchyElements(n,dividedQuery);
     }
-    var getHierarchyElements = function (currOperatorIndex, dividedQuery) {
-        var rootElements = getRootElements(dividedQuery[currOperatorIndex]);
+    var getHierarchyElements = function (currOperatorIndex, dividedQuery , rootElements) {
         return  getChildrenOfAllRoots(rootElements, getNextOperator(currOperatorIndex, dividedQuery))
     }
     var getNextOperator = function (currOperatorIndex, dividedQuery) {
@@ -81,28 +86,7 @@ var ofekQuery = function (query) {
                 if (childrenOfOneRoot !== "" && childrenOfOneRoot !== undefined) {
                     childrenOfAllRoots = pushChildren(childrenOfOneRoot,childrenOfAllRoots);
                 }
-            	/*switch (true) {
-                    case new RegExp("^#+").test(operator):
-                        child = getChildElement(RootElements[j], operator.substr(1), "id");
-                        if (child !== "" && child !== undefined) {
-                            children.push(child);
-                        }
-                        break;
-                    case new RegExp("^\\..+").test(operator):
-                        child = getChildElement(RootElements[j], operator.substr(1), "class");
-                        if (child !== "" && child !== undefined) {
-                            children.push(child);
-                        }
-                        break;
-                    default:
-                        if (RootElements[j].getElementsByTagName(operator).length !== 0) {
-                            child = getChildElement(RootElements[j], operator, "tag");
-                            if (child !== "" && child !== undefined) {
-                                children.push(child);
-                            }
-                        }
-                        break;
-                }*/
+
             }
         }
         return childrenOfAllRoots;

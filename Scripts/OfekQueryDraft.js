@@ -42,6 +42,7 @@ var getElementChild = function (parentElement,currentElementName,whatToCheck) {
         for (var j = 0; j < parentElement.children.length; j++) {
             switch(whatToCheck){
                 case "id":
+                    break;
                     if (parentElement.children[j].id === currentElementName) {
                         childElement = parentElement.children[j];
                         console.log(childElement + "-id"+ " "+childElement.innerHTML);
