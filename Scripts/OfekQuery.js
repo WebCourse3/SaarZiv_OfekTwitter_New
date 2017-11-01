@@ -1,50 +1,56 @@
+/*Count doesnt work for one element.
+*doesnt support more than two selectors
+* check if instace func works
+* get() works*/
 function $(name) {
 	return new ofekQuery(name);
 }
 
 var ofekQuery = function (query) {
+    var elements = [];
     var constructor = function () {
-        if(testHierarchy(query)){
+        if (testHierarchy(query)) {
             return getAllElements(query);
-		}else {
-        	console.log("false");
-        	return getRootElements(query);
-		}
+        } else {
+            console.log("false");
+            return getRootElements(query);
+        }
 
     }
 
 
-	//Private static methods
-	var testHierarchy =  function (query) {
+    //Private static methods
+    var testHierarchy = function (query) {
         return new RegExp("(.+ .+)+").test(query);
     }
     var getAllElements = function (query) {
-        var dividedQuery =  query.split(" ");
-		var n =0;
-		var allElements = [];
-	    //allElements.push(getHierarchyElements(n,dividedQuery));
-	    return getHierarchyElements(n,dividedQuery);
+        var childrenOfAllRoot = [];
+    	var lastChildren = [];
+    	var dividedQuery = query.split(" ");
+    	var n = 0;
+        /*for (var n = 0; n<dividedQuery.length;n++) {
+            childrenOfAllRoot =  getHierarchyElements(n, dividedQuery);
+        }
+        lastChildren = pushChildren(childrenOfAllRoot,lastChildren)
+		return lastChildren*/
+        return getHierarchyElements(n,dividedQuery);
     }
-	var getHierarchyElements = function (currOperatorIndex,dividedQuery) {
-		var hierarchyElements = [];
-    	var rootElements = getRootElements(dividedQuery[currOperatorIndex]);
-    	var childElement = getChildElements(rootElements,getNextOperator(currOperatorIndex,dividedQuery))
-		if(childElement !=="") {
-			hierarchyElements.push(childElement);
-		}
-		return hierarchyElements;
-
+    var getHierarchyElements = function (currOperatorIndex, dividedQuery) {
+        var rootElements = getRootElements(dividedQuery[currOperatorIndex]);
+        return  getChildrenOfAllRoots(rootElements, getNextOperator(currOperatorIndex, dividedQuery))
     }
-    var getNextOperator = function (currOperatorIndex,dividedQuery){
+    var getNextOperator = function (currOperatorIndex, dividedQuery) {
         return dividedQuery[currOperatorIndex + 1];
     }
     var getRootElements = function (query) {
-        switch (true){
+        switch (true) {
             case new RegExp("^#+").test(query):
-                return document.getElementById(query);
+				var a = document.getElementById((query.substr(1)));
+				//console.log(a)
+                return a;
                 break;
             case new RegExp("^\\..+").test(query):
-                return document.getElementsByClassName(query);
+                return document.getElementsByClassName(query.substr(1));
                 break;
             default:
                 return (document.getElementsByTagName(query).length === 0) ? "" :
@@ -53,47 +59,108 @@ var ofekQuery = function (query) {
 
         }
     }
-
-    var getChildElements = function (RootElements,operator) {
-    	var children ;//need to check,
-        for (var j = 0; j < RootElements.length; j++) {
-            switch (true){
-                case new RegExp("^#+").test(operator):
-	                children = getThroughChildren(RootElements[j],operator.substr(1),"id");
-                    break;
-                case new RegExp("^\\..+").test(operator):
-	                children =  getThroughChildren(RootElements[j],operator.substr(1),"class");
-                    break;
-                default:
-                    return (RootElements[j].getElementsByTagName(operator).length === 0) ? "" :
-	                    children = getThroughChildren(RootElements[j],operator,"tag");
-                    break;
-
+    var getChildrenOfAllRoots = function (RootElements, operator) {
+        var childrenOfOneRoot = [];
+        var childrenOfAllRoots = [];//need to check,
+		//if there is only one root Element:
+        if(RootElements.length === undefined ){
+            childrenOfOneRoot = switchCallGetChildrenOfOneRoot(RootElements,operator);
+            if (childrenOfOneRoot !== "" && childrenOfOneRoot !== undefined) {
+                childrenOfAllRoots = pushChildren(childrenOfOneRoot,childrenOfAllRoots);
             }
         }
+        else if(RootElements.length <= 1){
+            childrenOfOneRoot = switchCallGetChildrenOfOneRoot(RootElements[0],operator);
+            if (childrenOfOneRoot !== "" && childrenOfOneRoot !== undefined) {
+                childrenOfAllRoots = pushChildren(childrenOfOneRoot,childrenOfAllRoots);
+            }
+        }
+        else {
+            for (var j = 0; j < RootElements.length; j++) {
+                childrenOfOneRoot = switchCallGetChildrenOfOneRoot(RootElements[j],operator);
+                if (childrenOfOneRoot !== "" && childrenOfOneRoot !== undefined) {
+                    childrenOfAllRoots = pushChildren(childrenOfOneRoot,childrenOfAllRoots);
+                }
+            	/*switch (true) {
+                    case new RegExp("^#+").test(operator):
+                        child = getChildElement(RootElements[j], operator.substr(1), "id");
+                        if (child !== "" && child !== undefined) {
+                            children.push(child);
+                        }
+                        break;
+                    case new RegExp("^\\..+").test(operator):
+                        child = getChildElement(RootElements[j], operator.substr(1), "class");
+                        if (child !== "" && child !== undefined) {
+                            children.push(child);
+                        }
+                        break;
+                    default:
+                        if (RootElements[j].getElementsByTagName(operator).length !== 0) {
+                            child = getChildElement(RootElements[j], operator, "tag");
+                            if (child !== "" && child !== undefined) {
+                                children.push(child);
+                            }
+                        }
+                        break;
+                }*/
+            }
+        }
+        return childrenOfAllRoots;
     }
-    var getThroughChildren = function (RootElement,operator,whatToCheck) {
-	    for (var i = 0; i < RootElement.children.length; i++) {
-	    	switch (whatToCheck) {
+    var pushChildren = function(childrenOfOneRoot,childrenOfAllRoots){
+    	for(var i=0;i<childrenOfOneRoot.length;i++){
+    		childrenOfAllRoots.push(childrenOfOneRoot[i])
+		}
+		return childrenOfAllRoots;
+	}
+    var switchCallGetChildrenOfOneRoot = function(RootElement,operator){
+    	switch (true) {
+        	case new RegExp("^#+").test(operator):
+                return getChildrenOfOneRoot(RootElement, operator.substr(1), "id");
+
+                break;
+            case new RegExp("^\\..+").test(operator):
+                return getChildrenOfOneRoot(RootElement, operator.substr(1), "class");
+
+                break;
+            default:
+                if (RootElement.getElementsByTagName(operator).length !== 0) {
+                    return getChildrenOfOneRoot(RootElement, operator, "tag");
+                }
+                break;
+        }
+	}
+    var getChildrenOfOneRoot = function (RootElement,operator,whatToCheck) {
+	    var childrenOfOneRoot = [];
+	    var child ;
+
+    	for (var i = 0; i < RootElement.children.length; i++) {
+            var bool = false;
+    		switch (whatToCheck) {
 			    case "id":
 				    if (RootElement.children[i].id === operator) {
-					    return RootElement.children[i];
+					    child =  RootElement.children[i];
+					    bool = true;
 				    }
 				    break;
 			    case "tag":
 				    if (RootElement.children[i].tagName.toLowerCase() === operator) {
-					    return RootElement.children[i];
+                        child =  RootElement.children[i];
+                        bool = true;
 				    }
 				    break;
 			    case "class":
 				    if (RootElement.children[i].className === operator) {
-					    return RootElement.children[i];
+                        child = RootElement.children[i];
+                        bool = true;
 				    }
 		    }
+			if(bool){childrenOfOneRoot.push(child)};
 	    }
-	    return "";
+        return (childrenOfOneRoot === null ||childrenOfOneRoot.length === 0) ?
+			"" : childrenOfOneRoot;
     }
-    var elements = constructor();
+	elements = constructor();
 
     //Public instance methods
 	this.addClass = function (className){
@@ -170,7 +237,8 @@ var ofekQuery = function (query) {
 
 	}
 	this.count = function(){
-        return elements.length;
+		return  (elements.length !== NaN) ? elements.length : 1;
+
 	}
 	this.appendChild = function(childElementTag){
         for (var j = 0; j < elements.length; j++) {
@@ -201,8 +269,11 @@ var ofekQuery = function (query) {
 		}
 		elements.push(element);
 	}
-
+	this.getElements = function(){
+		return elements;
+	}
 }
+
 
 
 function aContainsB(a, b){
