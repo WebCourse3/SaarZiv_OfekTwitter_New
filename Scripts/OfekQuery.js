@@ -29,23 +29,31 @@ var ofekQuery = function (query) {
 	}
 	var getTagAndClassElements = function (query) {
 		var fatherTagElement;
+        var arrayFatherTagElements = [];
     	var dividedQuery = query.split(".");
     	var childrenWithClass = document.getElementsByClassName(dividedQuery[1]);
     	if(childrenWithClass.length > 0) {
             for (var i = 0; i < childrenWithClass.length; i++) {
                 if (childrenWithClass[i].parentElement.localName === dividedQuery[0]) {
                     fatherTagElement = childrenWithClass[i].parentElement;
-                    return fatherTagElement;
+                    if(!containsSameElement(fatherTagElement,arrayFatherTagElements)) {
+                        arrayFatherTagElements.push(fatherTagElement);
+                    }
                 }
             }
-            return "";
         }
-        else{
-            if (childrenWithClass.parent === dividedQuery[0]) {
-                fatherTagsElements.push(childrenWithClass)
+        return arrayFatherTagElements;
+    }
+    var containsSameElement = function (fatherTagElement,arrayFatherTagElements) {
+        if(arrayFatherTagElements === fatherTagElement){
+            return true
+        }
+        for(var i=0;i<arrayFatherTagElements.length;i++){
+            if(fatherTagElement === arrayFatherTagElements[i]){
+                return true;
             }
-		}
-		return fatherTagsElements;
+        }
+        return false;
     }
     var getAllElements = function (query) {
         var childrenOfAllRoot = [];
