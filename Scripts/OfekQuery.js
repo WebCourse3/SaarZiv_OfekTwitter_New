@@ -5,7 +5,6 @@
 function $(name) {
 	return new ofekQuery(name);
 }
-
 var ofekQuery = function (query) {
     var elements = [];
     var constructor = function () {
@@ -144,7 +143,9 @@ var ofekQuery = function (query) {
         return (childrenOfOneRoot === null ||childrenOfOneRoot.length === 0) ?
 			"" : childrenOfOneRoot;
     }
-	elements = constructor();
+
+    //instantiate elements
+    elements = constructor();
 
     //Public instance methods
 	this.addClass = function (className){
